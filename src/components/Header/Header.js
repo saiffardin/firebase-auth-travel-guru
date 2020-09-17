@@ -1,15 +1,26 @@
 import React from 'react';
 import { Button, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 
 const Header = () => {
+
+    let history = useHistory();
+
+    const goToHome = () => {
+        history.push('/');
+    }
+
+    const logInHandler = () => {
+        console.log("log in clicked");
+    }
+
     return (
         <div className='header'>
 
             <Navbar bg="light" expand="lg" >
-                <Navbar.Brand href="#home" >
+                <Navbar.Brand onClick={goToHome} >
                     <img className="ml-5" style={{ width: '100px' }} src={require('../../images/Logo.png')} alt="" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,13 +32,14 @@ const Header = () => {
                     </Form>
 
                     <Nav className="m-auto">
-                        <Nav.Link href="" className="m-2">News</Nav.Link>
+                        
+                        <Nav.Link onClick={goToHome} className="m-2">Home</Nav.Link>
                         <Nav.Link href="" className="m-2">Destination</Nav.Link>
                         <Nav.Link href="" className="m-2">Blog</Nav.Link>
                         <Nav.Link href="" className="m-2">Contact</Nav.Link>
-                        {/* <Link to="logIn"> */}
-                            <Button variant="primary" className="m-2">Log In</Button>
-                        {/* </Link> */}
+                        <Link to="/logInAndSignUp">
+                            <Button onClick={logInHandler} variant="primary" className="m-2">Log In</Button>
+                        </Link>
 
 
 

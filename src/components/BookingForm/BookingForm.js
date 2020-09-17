@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const BookingForm = (props) => {
 
     let destination = props.destination;
+    let history = useHistory();
+
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
@@ -14,9 +17,12 @@ const BookingForm = (props) => {
             // event.preventDefault();
             event.stopPropagation();
         }
-        
 
         setValidated(true);
+
+        if (validated) {
+            history.push('/afterLogin');
+        }
     };
 
     const bookingFormStyle = {
@@ -37,11 +43,12 @@ const BookingForm = (props) => {
                     <Form.Group as={Col} controlId="validationCustom01">
                         <Form.Label>Origin</Form.Label>
                         <Form.Control
+                            readOnly
                             required
                             type="text"
                             placeholder="Enter where you from"
                             defaultValue="Dhaka"
-
+                            style={{ fontWeight: "bold" }}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -52,10 +59,12 @@ const BookingForm = (props) => {
                     <Form.Group as={Col} controlId="validationCustom02">
                         <Form.Label>Destination</Form.Label>
                         <Form.Control
+                            readOnly
                             required
                             type="text"
                             placeholder="Enter where you want to go"
-                            defaultValue= {destination}
+                            defaultValue={destination}
+                            style={{ fontWeight: "bold" }}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -77,6 +86,7 @@ const BookingForm = (props) => {
                     <Form.Group as={Col} md="6" controlId="validationCustom04">
                         <Form.Label>To</Form.Label>
                         <Form.Control
+
                             required
                             type="date"
                             placeholder="Last name"
@@ -86,7 +96,7 @@ const BookingForm = (props) => {
                     </Form.Group>
 
                 </Form.Row>
-                <Button style={{ width: '100%'}} type="submit">Start Booking</Button>
+                <Button style={{ width: '100%' }} type="submit">Start Booking</Button>
             </Form>
         </div>
     );
