@@ -2,8 +2,11 @@ import React, { useContext, useState } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
+import { initializeLoginFramework, signInWithEmailAndPassword } from './LoginManager';
 
 const LogIn = (props) => {
+
+    initializeLoginFramework();
 
     const [user, setUser] = useState({
         isSignedIn: false,
@@ -62,19 +65,24 @@ const LogIn = (props) => {
 
         if (user.email && user.password) {
             console.log("sent to database");
-            document.getElementById("login-form").reset();
+            
 
-            // const email = user.email;
-            // const password = user.password;
+            const email = user.email;
+            const password = user.password;
 
-            // signInWithEmailAndPassword(user)
-            //     .then(res => {
-            //         if (res === -1) {
-            //             alert('user-not-found. Create Account First');
-            //             return;
-            //         }
-            //         // console.log("user logged in");
-            //         // console.log(res);
+            signInWithEmailAndPassword(user)
+                .then(res => {
+                    if (res === -1) {
+                        alert('user-not-found. Create Account First');
+                        return;
+                    }
+
+                    if (res === -2) {
+                        alert('The password is incorrect or the user does not have a password');
+                        return;
+                    }
+                    console.log("user logged in");
+                    console.log(res);
 
 
             //         db.collection('users').doc(res.uid).get()
@@ -92,7 +100,9 @@ const LogIn = (props) => {
             //                 console.log("login.js a db thike displayName read korte jhamela hoise")
             //             })
 
-            //     })
+                })
+
+            document.getElementById("login-form").reset();
 
         }
         else {

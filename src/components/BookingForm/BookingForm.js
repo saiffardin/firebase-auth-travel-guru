@@ -9,19 +9,30 @@ const BookingForm = (props) => {
 
     const [validated, setValidated] = useState(false);
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
 
-        if (form.checkValidity() === false) {
-            // event.preventDefault();
-            event.stopPropagation();
-        }
+        setValidated(form.checkValidity());
 
-        setValidated(true);
+        console.log('validate form: ', form.checkValidity());
+        console.log('validate: ', validated);
 
-        if (validated) {
+
+        // if (form.checkValidity() === false) {
+        //     // event.preventDefault();
+        //     event.stopPropagation();
+        //     alert('Enter Dates Please.');
+        // }
+
+        if (form.checkValidity()) {
             history.push('/afterLogin');
+
+        }
+        else {
+            event.stopPropagation();
+            alert('Enter Dates Please.');
         }
     };
 
@@ -65,6 +76,7 @@ const BookingForm = (props) => {
                             placeholder="Enter where you want to go"
                             defaultValue={destination}
                             style={{ fontWeight: "bold" }}
+
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -77,8 +89,7 @@ const BookingForm = (props) => {
                         <Form.Control
                             required
                             type="date"
-                            placeholder="First name"
-                            defaultValue="Mark"
+                        // onBlur={}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -86,17 +97,18 @@ const BookingForm = (props) => {
                     <Form.Group as={Col} md="6" controlId="validationCustom04">
                         <Form.Label>To</Form.Label>
                         <Form.Control
-
                             required
                             type="date"
-                            placeholder="Last name"
-                            defaultValue="Otto"
+                        // onBlur={}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
                 </Form.Row>
+
+
                 <Button style={{ width: '100%' }} type="submit">Start Booking</Button>
+
             </Form>
         </div>
     );

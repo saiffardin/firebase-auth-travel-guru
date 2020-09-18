@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import LogIn from '../Login/LogIn';
 import SignUp from '../SignUp/SignUp';
+import { handleGoogleLogin, initializeThirdPartyLoginFramework, handleFacebookLogin } from './ThirdPartySignInManager';
 
 const LoginAndSignUp = () => {
+
+    initializeThirdPartyLoginFramework();
 
     let [logInFlag, setLogInFlag] = useState(true);
 
@@ -22,12 +25,16 @@ const LoginAndSignUp = () => {
         background: 'whitesmoke'
     }
 
-    const fbHandler = ()=>{
+    const fbHandler = () => {
         console.log('FB');
+        handleFacebookLogin();
     }
 
-    const googleHandler = ()=>{
+
+
+    const googleHandler = () => {
         console.log('Google');
+        handleGoogleLogin();
     }
 
     return (
@@ -51,7 +58,7 @@ const LoginAndSignUp = () => {
             <h3 className='text-center my-4'>Or</h3>
 
             {/* FB */}
-            <div  style={styleThirdyParty} >
+            <div style={styleThirdyParty} >
                 <h5 className='my-2 mx-5' onClick={fbHandler}>
                     <img style={{ width: '40px' }} src={require('../../images/fb.png')} alt="" /> <span className="ml-3">Continue with Facebook</span>
                 </h5>

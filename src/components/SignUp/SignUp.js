@@ -2,8 +2,11 @@ import React, { useContext, useState } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
+import { handleFirebase, initializeSignUpFramework } from './SignUpManager';
 
 const SignUp = (props) => {
+    
+    initializeSignUpFramework();
 
     let history = useHistory();
 
@@ -16,10 +19,6 @@ const SignUp = (props) => {
         margin: '0 auto',
     }
 
-    const toggle = () => {
-        console.log('fdfdsfs');
-    }
-
     let isFirstNameValid = false;
     let isLastNameValid = false;
     let isEmailValid = false;
@@ -30,7 +29,6 @@ const SignUp = (props) => {
     let email = '';
     let password = '';
     let passwordConfirm = '';
-
 
 
     const handleBlur = (e) => {
@@ -118,10 +116,10 @@ const SignUp = (props) => {
         };
 
         console.log(newUser);
-        setLoggedInUser(newUser)
+        setLoggedInUser(newUser);
 
         // call signup manager
-
+        handleFirebase(newUser);
 
         document.getElementById("signup-form").reset();
     }
@@ -201,7 +199,6 @@ const SignUp = (props) => {
                         />
                     </Form.Group>
                 </Form.Row>
-
 
                 <Button style={{ width: '100%' }} type="submit">Create Account</Button>
 
