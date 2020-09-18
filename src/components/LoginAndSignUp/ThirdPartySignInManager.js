@@ -18,23 +18,21 @@ export const initializeThirdPartyLoginFramework = () => {
 }
 
 
-export const handleGoogleLogin = () => {
+export const handleGoogleLogin = (history,from) => {
     // console.log("google");
     let provider = new firebase.auth.GoogleAuthProvider();
-    return firebaseAuth(provider);
+    return firebaseAuth(provider,history,from);
 }
 
 
-export const handleFacebookLogin = () => {
+export const handleFacebookLogin = (history,from) => {
     // console.log("facebook");
     let provider = new firebase.auth.FacebookAuthProvider();
-    return firebaseAuth(provider);
+    return firebaseAuth(provider,history,from);
 }
 
 
-const firebaseAuth = (provider) => {
-
-    // const db = firebase.firestore();
+const firebaseAuth = (provider,history,from) => {
 
     return firebase.auth().signInWithPopup(provider)
         .then((result) => {
@@ -42,34 +40,24 @@ const firebaseAuth = (provider) => {
             console.log("Successfully Logged In");
             console.log(result.user);
 
-            let token = result.credential.accessToken;
+            // let token = result.credential.accessToken;
 
             let { displayName, email } = result.user;
 
             console.log(displayName);
             console.log(email);
 
+            const newUserInfo = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                isSignedIn: true,
+            };
 
-            //         const newUserInfo = { ...user };
-            //         newUserInfo.uid = result.user.uid;
+            console.log(newUserInfo);
 
-            //         newUserInfo.email = email;
-            //         newUserInfo.isSignedIn = true;
-            //         newUserInfo.courses = [];
-            //         newUserInfo.displayName = displayName;
-            //         newUserInfo.photoURL = photoURL;
-
-            //         console.log(newUserInfo);
-
-
-            //         db.collection('users').doc(newUserInfo.uid).set(newUserInfo, {merge: true})
-            //         .then(()=>{
-            //             console.log("update user table");
-            //         })
-
-
-            //         // history.replace(from);
-            //         return (newUserInfo);
+            history.replace(from);
+            return (newUserInfo);
 
         })
         .catch(function (error) {

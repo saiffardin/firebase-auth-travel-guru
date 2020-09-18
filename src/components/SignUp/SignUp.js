@@ -5,12 +5,11 @@ import { UserContext } from '../../App';
 import { handleFirebase, initializeSignUpFramework } from './SignUpManager';
 
 const SignUp = (props) => {
-    
+
     initializeSignUpFramework();
 
-    let history = useHistory();
-
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    let history = useHistory();
 
     const FormStyle = {
         border: '1px solid black',
@@ -112,14 +111,13 @@ const SignUp = (props) => {
             firstName: firstName,
             lastName: lastName,
             displayName: firstName,
-            isSignedIn: true,
+            isSignedIn: false,
         };
 
         console.log(newUser);
-        setLoggedInUser(newUser);
 
         // call signup manager
-        handleFirebase(newUser);
+        handleFirebase(newUser, setLoggedInUser, history);
 
         document.getElementById("signup-form").reset();
     }

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { UserContext } from '../../App';
 import LogIn from '../Login/LogIn';
 import SignUp from '../SignUp/SignUp';
 import { handleGoogleLogin, initializeThirdPartyLoginFramework, handleFacebookLogin } from './ThirdPartySignInManager';
@@ -8,6 +10,12 @@ const LoginAndSignUp = () => {
     initializeThirdPartyLoginFramework();
 
     let [logInFlag, setLogInFlag] = useState(true);
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const history = useHistory();
+    const location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/afterLogin" } };
 
     const toggle = (e) => {
         // e.stopPropagation();
@@ -27,14 +35,19 @@ const LoginAndSignUp = () => {
 
     const fbHandler = () => {
         console.log('FB');
-        handleFacebookLogin();
+        handleFacebookLogin(history, from)
+            .then((res) => {
+                setLoggedInUser(res)
+            })
     }
-
 
 
     const googleHandler = () => {
         console.log('Google');
-        handleGoogleLogin();
+        handleGoogleLogin(history, from)
+            .then((res) => {
+                setLoggedInUser(res)
+            })
     }
 
     return (

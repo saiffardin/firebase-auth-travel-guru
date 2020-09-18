@@ -18,25 +18,25 @@ export const initializeLoginFramework = () => {
 }
 
 
-export const signInWithEmailAndPassword = (user) => {
+export const signInWithEmailAndPassword = (user,history,from) => {
 
     let email = user.email;
     let password = user.password;
 
     return firebase.auth().signInWithEmailAndPassword(email, password)
         .then((res) => {
-            console.log("successful");
-            // console.log("uid: ",res.user.uid);
+            console.log("successful : in login manager");
+            // console.log(res.user);
 
-            const newUserInfo = { ...user };
-
-            newUserInfo.uid = res.user.uid;
-            
-            newUserInfo.email = email;
-            newUserInfo.isSignedIn = true;
-            newUserInfo.displayName = res.user.displayName;
+            const newUserInfo = {
+                uid: res.user.uid,
+                email: res.user.email,
+                displayName: res.user.displayName,
+                isSignedIn: true,
+            };
 
             console.log(newUserInfo);
+            history.replace(from);
             return newUserInfo;
         })
         .catch((err) => {
@@ -51,7 +51,7 @@ export const signInWithEmailAndPassword = (user) => {
                 return -1;
             }
 
-           
+
             if (err.code === 'auth/wrong-password') {
                 return -2;
             }

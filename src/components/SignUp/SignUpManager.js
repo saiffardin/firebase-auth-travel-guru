@@ -6,6 +6,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+
 // firebase config
 import { firebaseConfig } from "../../firebaseConfig";
 
@@ -19,15 +20,13 @@ export const initializeSignUpFramework = () => {
 
 
 
-export const handleFirebase = (user) => {
+export const handleFirebase = (user, setLoggedInUser, history) => {
 
     let email = user.email;
     let password = user.password;
 
-    // let firstName = user.firstName;
-    // let lastName = user.lastName;
     let displayName = user.displayName;
-    // let isSignedIn = user.isSignedIn;
+
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((res) => {
@@ -35,23 +34,15 @@ export const handleFirebase = (user) => {
 
             res.user.updateProfile({
                 displayName: displayName,
-              })
-
-            //         return db.collection('users').doc(res.user.uid).set({
-            //             email: newUser.email,
-            //             password: newUser.password,
-            //             firstName: newUser.firstName,
-            //             lastName: newUser.lastName,
-            //             courses : [],
-            //         });
+            })
 
         })
         .then(() => {
             console.log("account created successfully : inside signup manager.");
-            //         newUser.isSignedIn = true;
-            //         setLoggedInUser(newUser);
+            user.isSignedIn = true;
+            setLoggedInUser(user);
             //         localStorage.setItem('user', JSON.stringify(newUser))
-            //         history.push("/profile");
+            history.push("/afterLogin");
         })
         .catch((err) => {
             let errorCode = err.code;

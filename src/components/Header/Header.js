@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
 
 
 
 const Header = () => {
 
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     let history = useHistory();
 
     const goToHome = () => {
@@ -14,6 +16,7 @@ const Header = () => {
 
     const logInHandler = () => {
         console.log("log in clicked");
+        // console.log(loggedInUser);
     }
 
     return (
@@ -32,16 +35,21 @@ const Header = () => {
                     </Form>
 
                     <Nav className="m-auto">
-                        
+
                         <Nav.Link onClick={goToHome} className="m-2">Home</Nav.Link>
                         <Nav.Link href="" className="m-2">Destination</Nav.Link>
                         <Nav.Link href="" className="m-2">Blog</Nav.Link>
                         <Nav.Link href="" className="m-2">Contact</Nav.Link>
-                        <Link to="/logInAndSignUp">
-                            <Button onClick={logInHandler} variant="primary" className="m-2">Log In</Button>
-                        </Link>
 
 
+                        {
+                            loggedInUser.isSignedIn
+                                ? <Button variant="dark" className="m-2">{loggedInUser.displayName}</Button>
+
+                                : <Link to="/logInAndSignUp">
+                                    <Button onClick={logInHandler} variant="primary" className="m-2">Log In</Button>
+                                </Link>
+                        }
 
                     </Nav>
 

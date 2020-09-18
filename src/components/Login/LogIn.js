@@ -22,8 +22,7 @@ const LogIn = (props) => {
     const history = useHistory();
     const location = useLocation();
 
-    // let { from } = location.state || { from: { pathname: "/profile" } };
-    // initializeLoginFramework();
+    let { from } = location.state || { from: { pathname: "/afterLogin" } };
 
 
     const FormStyle = {
@@ -65,12 +64,12 @@ const LogIn = (props) => {
 
         if (user.email && user.password) {
             console.log("sent to database");
-            
+
 
             const email = user.email;
             const password = user.password;
 
-            signInWithEmailAndPassword(user)
+            signInWithEmailAndPassword(user,history,from)
                 .then(res => {
                     if (res === -1) {
                         alert('user-not-found. Create Account First');
@@ -81,24 +80,23 @@ const LogIn = (props) => {
                         alert('The password is incorrect or the user does not have a password');
                         return;
                     }
-                    console.log("user logged in");
-                    console.log(res);
+                    // console.log(res);
 
 
-            //         db.collection('users').doc(res.uid).get()
-            //             .then((doc) => {
-            //                 console.log('displayName: ', doc.data().firstName);
-            //                 res.displayName = doc.data().firstName;
-            //             })
-            //             .then(() => {
-            //                 setUser(res);
-            //                 setLoggedInUser(res);
-            //                 saveToLocalStorage(res);
-            //                 history.replace(from);
-            //             })
-            //             .catch(() => {
-            //                 console.log("login.js a db thike displayName read korte jhamela hoise")
-            //             })
+                    //         db.collection('users').doc(res.uid).get()
+                    //             .then((doc) => {
+                    //                 console.log('displayName: ', doc.data().firstName);
+                    //                 res.displayName = doc.data().firstName;
+                    //             })
+                    //             .then(() => {
+                    //                 setUser(res);
+                    //                 setLoggedInUser(res);
+                    //                 saveToLocalStorage(res);
+                    //                 history.replace(from);
+                    //             })
+                    //             .catch(() => {
+                    //                 console.log("login.js a db thike displayName read korte jhamela hoise")
+                    //             })
 
                 })
 
@@ -113,7 +111,7 @@ const LogIn = (props) => {
 
     return (
         <div className="container">
-            
+
 
             <Form noValidate onSubmit={handleSubmit} style={FormStyle} id='login-form'>
 
