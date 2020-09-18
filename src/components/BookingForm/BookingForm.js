@@ -20,12 +20,6 @@ const BookingForm = (props) => {
         console.log('validate: ', validated);
 
 
-        // if (form.checkValidity() === false) {
-        //     // event.preventDefault();
-        //     event.stopPropagation();
-        //     alert('Enter Dates Please.');
-        // }
-
         if (form.checkValidity()) {
             history.push('/afterLogin');
 

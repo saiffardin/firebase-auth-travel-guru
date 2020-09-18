@@ -69,7 +69,7 @@ const LogIn = (props) => {
             const email = user.email;
             const password = user.password;
 
-            signInWithEmailAndPassword(user,history,from)
+            signInWithEmailAndPassword(user)
                 .then(res => {
                     if (res === -1) {
                         alert('user-not-found. Create Account First');
@@ -80,23 +80,11 @@ const LogIn = (props) => {
                         alert('The password is incorrect or the user does not have a password');
                         return;
                     }
+                    else {
+                        setLoggedInUser(res);
+                        history.replace(from);
+                    }
                     // console.log(res);
-
-
-                    //         db.collection('users').doc(res.uid).get()
-                    //             .then((doc) => {
-                    //                 console.log('displayName: ', doc.data().firstName);
-                    //                 res.displayName = doc.data().firstName;
-                    //             })
-                    //             .then(() => {
-                    //                 setUser(res);
-                    //                 setLoggedInUser(res);
-                    //                 saveToLocalStorage(res);
-                    //                 history.replace(from);
-                    //             })
-                    //             .catch(() => {
-                    //                 console.log("login.js a db thike displayName read korte jhamela hoise")
-                    //             })
 
                 })
 

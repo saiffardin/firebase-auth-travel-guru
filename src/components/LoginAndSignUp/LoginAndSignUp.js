@@ -24,7 +24,7 @@ const LoginAndSignUp = () => {
 
     }
 
-    const styleThirdyParty = {
+    const styleThirdParty = {
         border: '1px solid lightgray',
         width: '400px',
         margin: '30px auto',
@@ -37,7 +37,8 @@ const LoginAndSignUp = () => {
         console.log('FB');
         handleFacebookLogin(history, from)
             .then((res) => {
-                setLoggedInUser(res)
+                setLoggedInUser(res);
+                history.replace(from);
             })
     }
 
@@ -46,7 +47,8 @@ const LoginAndSignUp = () => {
         console.log('Google');
         handleGoogleLogin(history, from)
             .then((res) => {
-                setLoggedInUser(res)
+                setLoggedInUser(res);
+                history.replace(from);
             })
     }
 
@@ -71,14 +73,14 @@ const LoginAndSignUp = () => {
             <h3 className='text-center my-4'>Or</h3>
 
             {/* FB */}
-            <div style={styleThirdyParty} >
+            <div style={styleThirdParty} >
                 <h5 className='my-2 mx-5' onClick={fbHandler}>
                     <img style={{ width: '40px' }} src={require('../../images/fb.png')} alt="" /> <span className="ml-3">Continue with Facebook</span>
                 </h5>
             </div>
 
             {/* Google */}
-            <div style={styleThirdyParty} >
+            <div style={styleThirdParty} >
                 <h5 className='my-2 mx-5' onClick={googleHandler}>
                     <img style={{ width: '40px' }} src={require('../../images/google.png')} alt="" /> <span className="ml-3">Continue with Google</span>
                 </h5>

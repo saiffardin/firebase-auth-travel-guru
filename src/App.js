@@ -12,6 +12,8 @@ import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
 import LogIn from './components/Login/LogIn';
 import LoginAndSignUp from './components/LoginAndSignUp/LoginAndSignUp';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RoomDemo from './components/RoomDemo/RoomDemo';
 import Sajek from './components/Sajek/Sajek';
 import SignUp from './components/SignUp/SignUp';
 import Sreemongol from './components/Sreemongol/Sreemongol';
@@ -35,9 +37,6 @@ function App() {
             <Router className="App">
 
                 <Header></Header>
-                {/* <LogIn></LogIn> */}
-                {/* <SignUp></SignUp> */}
-
 
                 <Switch>
                     <Route exact path='/'>
@@ -60,9 +59,9 @@ function App() {
                         <LoginAndSignUp></LoginAndSignUp>
                     </Route>
 
-                    <Route path='/afterLogin'>
+                    <PrivateRoute path='/afterLogin'>
                         <AfterLogin></AfterLogin>
-                    </Route>
+                    </PrivateRoute>
 
                     <Route path='*'>
                         <h1>Error 404</h1>

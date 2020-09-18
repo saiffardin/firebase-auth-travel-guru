@@ -41,7 +41,6 @@ export const handleFirebase = (user, setLoggedInUser, history) => {
             console.log("account created successfully : inside signup manager.");
             user.isSignedIn = true;
             setLoggedInUser(user);
-            //         localStorage.setItem('user', JSON.stringify(newUser))
             history.push("/afterLogin");
         })
         .catch((err) => {

@@ -18,21 +18,21 @@ export const initializeThirdPartyLoginFramework = () => {
 }
 
 
-export const handleGoogleLogin = (history,from) => {
+export const handleGoogleLogin = () => {
     // console.log("google");
     let provider = new firebase.auth.GoogleAuthProvider();
-    return firebaseAuth(provider,history,from);
+    return firebaseAuth(provider);
 }
 
 
-export const handleFacebookLogin = (history,from) => {
+export const handleFacebookLogin = () => {
     // console.log("facebook");
     let provider = new firebase.auth.FacebookAuthProvider();
-    return firebaseAuth(provider,history,from);
+    return firebaseAuth(provider);
 }
 
 
-const firebaseAuth = (provider,history,from) => {
+const firebaseAuth = (provider) => {
 
     return firebase.auth().signInWithPopup(provider)
         .then((result) => {
@@ -56,7 +56,6 @@ const firebaseAuth = (provider,history,from) => {
 
             console.log(newUserInfo);
 
-            history.replace(from);
             return (newUserInfo);
 
         })

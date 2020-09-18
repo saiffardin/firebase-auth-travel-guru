@@ -18,7 +18,7 @@ export const initializeLoginFramework = () => {
 }
 
 
-export const signInWithEmailAndPassword = (user,history,from) => {
+export const signInWithEmailAndPassword = (user) => {
 
     let email = user.email;
     let password = user.password;
@@ -36,7 +36,7 @@ export const signInWithEmailAndPassword = (user,history,from) => {
             };
 
             console.log(newUserInfo);
-            history.replace(from);
+            
             return newUserInfo;
         })
         .catch((err) => {
