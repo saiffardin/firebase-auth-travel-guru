@@ -32,7 +32,7 @@ const BookingForm = (props) => {
 
     const bookingFormStyle = {
         border: '1px solid black',
-        width: '500px',
+        // width: '500px',
         padding: '20px',
     }
 

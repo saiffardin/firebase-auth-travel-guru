@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import './HomePage.css';
+
 const HomePage = () => {
 
     const myCardStyle = {
@@ -12,7 +14,7 @@ const HomePage = () => {
     };
 
     return (
-        <div className='d-flex justify-content-around'>
+        <div className='homePage-div d-flex justify-content-around row'>
 
 
             {/* card 1 : Sajek */}
