@@ -1,6 +1,6 @@
 # firebase-auth-travel-guru
 
-A site where people can book hotels in their desired travel destinations.
+This module (or website) was built to demonstrate user-login using 'firebase-auth'. Here a user can login with his email and password or his GOOGLE or FACEBOOK account.
 
 ### `Key Features:`
 
